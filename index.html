@@ -1,96 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Shop</title>
+    <title>Dream Cricket 25 - Fan Page</title>
     <style>
-        /* This makes it look beautiful */
         body {
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            background: #1a1a2e;
+            color: #fff;
             padding: 20px;
+            margin: 0;
         }
-        h1 {
+        .header {
             text-align: center;
-            color: #333;
-        }
-        .product {
-            background: white;
+            padding: 30px;
+            background: linear-gradient(135deg, #16213e, #0f3460);
             border-radius: 10px;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+            color: #e94560;
+        }
+        .header p {
+            font-size: 18px;
+            color: #aaa;
+        }
+        .section {
+            background: #16213e;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .section h2 {
+            color: #e94560;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .feature-card {
+            background: #0f3460;
             padding: 15px;
-            width: 250px;
-            margin: 15px auto;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: inline-block;
-        }
-        .product img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
             border-radius: 8px;
+            text-align: center;
         }
-        .product h3 {
-            color: #333;
+        .feature-card h3 {
+            color: #e94560;
             margin: 10px 0;
         }
-        .product .price {
-            color: #e67e22;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
+        .btn {
             display: inline-block;
-            margin-top: 10px;
+            background: #e94560;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
             font-weight: bold;
+            margin-top: 10px;
         }
-        .whatsapp-btn:hover {
-            background: #1da851;
+        .btn:hover {
+            background: #c73e54;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <h1>🛍️ My Product Catalog</h1>
-
-    <!-- Product 1 -->
-    <div class="product">
-        <img src="product1.jpg" alt="Product 1">
-        <h3>Product Name 1</h3>
-        <p class="price">$10.00</p>
-        <p>Short description here</p>
-        <a href="https://wa.me/923001234567?text=I want to order Product Name 1" 
-           class="whatsapp-btn" target="_blank">
-           💬 Order on WhatsApp
-        </a>
+    <div class="header">
+        <h1>🏏 Dream Cricket 2025</h1>
+        <p>Your ultimate cricket gaming experience</p>
     </div>
 
-    <!-- Product 2 -->
-    <div class="product">
-        <img src="product2.jpg" alt="Product 2">
-        <h3>Product Name 2</h3>
-        <p class="price">$15.00</p>
-        <p>Short description here</p>
-        <a href="https://wa.me/923001234567?text=I want to order Product Name 2" 
-           class="whatsapp-btn" target="_blank">
-           💬 Order on WhatsApp
-        </a>
+    <div class="section">
+        <h2>🎮 Game Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>🏆 World Championship</h3>
+                <p>Compete globally</p>
+            </div>
+            <div class="feature-card">
+                <h3>👥 Multiplayer</h3>
+                <p>Play with friends</p>
+            </div>
+            <div class="feature-card">
+                <h3>⭐ Licensed Teams</h3>
+                <p>Official players & teams</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎯 Dream League</h3>
+                <p>Build your dream team</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Product 3 -->
-    <div class="product">
-        <img src="https://via.placeholder.com/200" alt="Product 3">
-        <h3>Product Name 3</h3>
-        <p class="price">$20.00</p>
-        <p>Short description here</p>
-        <a href="https://wa.me/923001234567?text=I want to order Product Name 3" 
-           class="whatsapp-btn" target="_blank">
-           💬 Order on WhatsApp
-        </a>
+    <div class="section">
+        <h2>📱 Download Now</h2>
+        <p>Get the game from official stores:</p>
+        <a href="#" class="btn">Google Play</a>
+        <a href="#" class="btn">App Store</a>
+    </div>
+
+    <div class="section">
+        <h2>💡 Pro Tips</h2>
+        <ul>
+            <li>Complete daily missions for extra rewards</li>
+            <li>Save gems for premium player packs</li>
+            <li>Join a club to play with friends</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 Dream Cricket Fan Page | Not affiliated with official game
     </div>
 
 </body>
