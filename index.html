@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Shop</title>
+    <style>
+        /* This makes it look beautiful */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .product {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 250px;
+            margin: 15px auto;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        .product img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .product h3 {
+            color: #333;
+            margin: 10px 0;
+        }
+        .product .price {
+            color: #e67e22;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .whatsapp-btn:hover {
+            background: #1da851;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🛍️ My Product Catalog</h1>
+
+    <!-- Product 1 -->
+    <div class="product">
+        <img src="product1.jpg" alt="Product 1">
+        <h3>Product Name 1</h3>
+        <p class="price">$10.00</p>
+        <p>Short description here</p>
+        <a href="https://wa.me/923001234567?text=I want to order Product Name 1" 
+           class="whatsapp-btn" target="_blank">
+           💬 Order on WhatsApp
+        </a>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product">
+        <img src="product2.jpg" alt="Product 2">
+        <h3>Product Name 2</h3>
+        <p class="price">$15.00</p>
+        <p>Short description here</p>
+        <a href="https://wa.me/923001234567?text=I want to order Product Name 2" 
+           class="whatsapp-btn" target="_blank">
+           💬 Order on WhatsApp
+        </a>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Product 3">
+        <h3>Product Name 3</h3>
+        <p class="price">$20.00</p>
+        <p>Short description here</p>
+        <a href="https://wa.me/923001234567?text=I want to order Product Name 3" 
+           class="whatsapp-btn" target="_blank">
+           💬 Order on WhatsApp
+        </a>
+    </div>
+
+</body>
+</html>
