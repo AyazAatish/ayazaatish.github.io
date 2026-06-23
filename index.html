@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dream Cricket 25 - Premium Accounts</title>
+    <title>Game Accounts Marketplace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * {
@@ -10,295 +10,430 @@
             box-sizing: border-box;
         }
         body {
-            font-family: Arial, sans-serif;
-            background: #0a0a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #fff;
             padding: 15px;
+            min-height: 100vh;
         }
+        
+        /* Header */
         .header {
             text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, #1a1a3e, #0f3460);
-            border-radius: 15px;
-            margin-bottom: 25px;
+            padding: 40px 20px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: "🎮";
+            position: absolute;
+            font-size: 120px;
+            right: -20px;
+            bottom: -30px;
+            opacity: 0.15;
+            transform: rotate(-10deg);
         }
         .header h1 {
-            font-size: 28px;
-            color: #e94560;
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .header h1 span {
+            color: #ffd700;
         }
         .header p {
-            color: #aaa;
+            color: rgba(255,255,255,0.9);
             margin-top: 8px;
+            font-size: 16px;
+            letter-spacing: 2px;
         }
-        .account-card {
-            background: #1a1a3e;
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            margin-top: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Game Category Title */
+        .game-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 35px 0 20px;
+            padding: 15px 25px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
             border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border: 1px solid #2a2a5e;
+            display: inline-block;
+            box-shadow: 0 5px 25px rgba(102, 126, 234, 0.3);
         }
-        .account-card h2 {
-            color: #e94560;
-            font-size: 22px;
-            margin-bottom: 5px;
+        .game-title .icon {
+            margin-right: 10px;
         }
-        .account-price {
+
+        /* Account Cards */
+        .account-card {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 35px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .account-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.2);
+        }
+
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .account-header h2 {
             font-size: 24px;
-            font-weight: bold;
-            color: #ffd700;
-            margin: 10px 0;
+            color: #fff;
         }
+        .account-header .price {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffd700;
+            background: rgba(255,215,0,0.15);
+            padding: 5px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        .rating {
+            color: #ffd700;
+            margin: 5px 0 12px;
+            font-size: 14px;
+        }
+
         .account-details {
-            background: #0f0f2a;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 10px 0;
+            background: rgba(0,0,0,0.3);
+            padding: 18px 20px;
+            border-radius: 12px;
+            margin: 12px 0 18px;
+            border-left: 4px solid #667eea;
+        }
+        .account-details ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 20px;
         }
         .account-details li {
-            list-style: none;
-            padding: 5px 0;
-            color: #ccc;
-            border-bottom: 1px solid #1a1a3e;
+            padding: 6px 0;
+            color: #ddd;
+            font-size: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .account-details li:last-child {
             border-bottom: none;
         }
-        .account-details span {
+        .account-details li span {
             color: #fff;
-            font-weight: bold;
+            font-weight: 600;
         }
+        .account-details .label {
+            color: #a8b5e0;
+            font-weight: 400;
+        }
+
+        /* Image Grid */
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 15px 0 18px;
         }
         .image-grid img {
             width: 100%;
-            height: 150px;
+            height: 140px;
             object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid #2a2a5e;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            background: #1a1a3e;
         }
         .image-grid img:hover {
-            border-color: #e94560;
-            transform: scale(1.02);
-            transition: 0.3s;
+            transform: scale(1.05);
+            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
+
+        /* WhatsApp Button */
         .whatsapp-btn {
             display: inline-block;
-            background: #25D366;
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
-            padding: 14px 30px;
-            border-radius: 30px;
+            padding: 14px 35px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 18px;
-            margin-top: 10px;
             text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.3);
             width: 100%;
+            letter-spacing: 0.5px;
         }
         .whatsapp-btn:hover {
-            background: #1da851;
+            transform: scale(1.02);
+            box-shadow: 0 8px 35px rgba(37, 211, 102, 0.5);
         }
-        .whatsapp-btn i {
-            margin-right: 10px;
-        }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 14px;
-        }
-        .badge {
+
+        /* Order Badge */
+        .order-badge {
             display: inline-block;
-            background: #e94560;
-            color: white;
-            padding: 4px 12px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            padding: 4px 16px;
             border-radius: 20px;
             font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-left: 10px;
         }
-        .rating {
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 20px;
+        }
+        .footer span {
             color: #ffd700;
-            margin: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 26px; }
+            .account-header { flex-direction: column; align-items: flex-start; }
+            .account-header .price { margin-top: 8px; }
+            .account-details ul { grid-template-columns: 1fr; }
+            .image-grid { grid-template-columns: repeat(2, 1fr); }
+            .image-grid img { height: 120px; }
+            .game-title { font-size: 22px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ======================================== -->
+    <!-- HEADER -->
+    <!-- ======================================== -->
     <div class="header">
-        <h1>🏏 Dream Cricket 2025</h1>
-        <p>Premium Accounts for Sale</p>
-        <p style="font-size: 14px; color: #ffd700;">⚡ All accounts are legitimately owned ⚡</p>
+        <h1>🎮 <span>Game</span> Accounts Marketplace</h1>
+        <p>Premium Gaming Accounts | Trusted Seller</p>
+        <div class="badge">✅ 100% Secure Transactions</div>
     </div>
 
     <!-- ======================================== -->
-    <!-- ACCOUNT 1 -->
+    <!-- DREAM CRICKET 25 SECTION -->
+    <!-- ======================================== -->
+    <div class="game-title">
+        <span class="icon">🏏</span> Dream Cricket 25 <span style="font-size:16px; color:#ffd700;">●</span> Accounts for Sale
+    </div>
+
+    <!-- ======================================== -->
+    <!-- DC25 - ACCOUNT 1 -->
     <!-- ======================================== -->
     <div class="account-card">
-        <h2>🔥 Account #1 - Legendary Squad</h2>
-        <div class="rating">⭐⭐⭐⭐⭐ 5.0 (12 sales)</div>
-        <div class="account-price">$25.00</div>
+        <div class="account-header">
+            <h2>🔥 Account #1 <span class="order-badge">⚡ Order Now</span></h2>
+            <span class="price">$25</span>
+        </div>
+        <div class="rating">⭐⭐⭐⭐⭐ 5.0 (12 sold)</div>
 
         <div class="account-details">
             <ul>
                 <li><span>🏆 Overall Rating:</span> 95</li>
-                <li><span>⭐ Players:</span> Virat Kohli, Rohit Sharma, Babar Azam, Shaheen Afridi</li>
+                <li><span>⭐ Players:</span> Virat Kohli, Rohit Sharma, Babar Azam</li>
                 <li><span>💎 Gems:</span> 5,000</li>
                 <li><span>🪙 Coins:</span> 250,000</li>
                 <li><span>🎯 Rank:</span> Legendary (Top 500)</li>
-                <li><span>🏅 Special Items:</span> Premium Bat Pack, Signature Kit</li>
+                <li><span>🏅 Special:</span> Premium Bat Pack</li>
             </ul>
         </div>
 
         <div class="image-grid">
-            <img src="https://via.placeholder.com/300x200/0f3460/e94560?text=Team+1" alt="Account 1 - Team">
-            <img src="https://via.placeholder.com/300x200/0f3460/e94560?text=Players+1" alt="Account 1 - Players">
-            <img src="https://via.placeholder.com/300x200/0f3460/e94560?text=Stats+1" alt="Account 1 - Stats">
-            <img src="https://via.placeholder.com/300x200/0f3460/e94560?text=Items+1" alt="Account 1 - Items">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/e94560?text=Team" alt="Team">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/e94560?text=Players" alt="Players">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/e94560?text=Stats" alt="Stats">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/e94560?text=Items" alt="Items">
         </div>
 
-        <a href="https://wa.me/923001234567?text=I want to buy Account #1 - Legendary Squad ($25)" 
+        <a href="https://wa.me/923001234567?text=I want to buy DC25 Account #1 - $25" 
            class="whatsapp-btn" target="_blank">
            💬 Order via WhatsApp
         </a>
     </div>
 
     <!-- ======================================== -->
-    <!-- ACCOUNT 2 -->
+    <!-- DC25 - ACCOUNT 2 -->
     <!-- ======================================== -->
     <div class="account-card">
-        <h2>💎 Account #2 - Diamond Collection</h2>
-        <div class="rating">⭐⭐⭐⭐⭐ 5.0 (8 sales)</div>
-        <div class="account-price">$18.00</div>
+        <div class="account-header">
+            <h2>💎 Account #2 <span class="order-badge">⚡ Order Now</span></h2>
+            <span class="price">$18</span>
+        </div>
+        <div class="rating">⭐⭐⭐⭐⭐ 5.0 (8 sold)</div>
 
         <div class="account-details">
             <ul>
                 <li><span>🏆 Overall Rating:</span> 88</li>
-                <li><span>⭐ Players:</span> Kane Williamson, Trent Boult, Devon Conway, Rashid Khan</li>
+                <li><span>⭐ Players:</span> Williamson, Boult, Conway, Rashid</li>
                 <li><span>💎 Gems:</span> 3,200</li>
                 <li><span>🪙 Coins:</span> 180,000</li>
                 <li><span>🎯 Rank:</span> Diamond (Top 1000)</li>
-                <li><span>🏅 Special Items:</span> Bowling Master Kit, T20 Jersey</li>
+                <li><span>🏅 Special:</span> Bowling Master Kit</li>
             </ul>
         </div>
 
         <div class="image-grid">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Team+2" alt="Account 2 - Team">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Players+2" alt="Account 2 - Players">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Stats+2" alt="Account 2 - Stats">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Items+2" alt="Account 2 - Items">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Match+2" alt="Account 2 - Match">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ffd700?text=Team" alt="Team">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ffd700?text=Players" alt="Players">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ffd700?text=Stats" alt="Stats">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ffd700?text=Items" alt="Items">
         </div>
 
-        <a href="https://wa.me/923001234567?text=I want to buy Account #2 - Diamond Collection ($18)" 
+        <a href="https://wa.me/923001234567?text=I want to buy DC25 Account #2 - $18" 
            class="whatsapp-btn" target="_blank">
            💬 Order via WhatsApp
         </a>
     </div>
 
     <!-- ======================================== -->
-    <!-- ACCOUNT 3 -->
+    <!-- DC25 - ACCOUNT 3 -->
     <!-- ======================================== -->
     <div class="account-card">
-        <h2>⚡ Account #3 - Rising Star</h2>
-        <div class="rating">⭐⭐⭐⭐ 4.8 (5 sales)</div>
-        <div class="account-price">$10.00</div>
+        <div class="account-header">
+            <h2>⚡ Account #3 <span class="order-badge">⚡ Order Now</span></h2>
+            <span class="price">$10</span>
+        </div>
+        <div class="rating">⭐⭐⭐⭐ 4.8 (5 sold)</div>
 
         <div class="account-details">
             <ul>
                 <li><span>🏆 Overall Rating:</span> 75</li>
-                <li><span>⭐ Players:</span> Suryakumar Yadav, Jasprit Bumrah, Shaheen Shah Afridi</li>
+                <li><span>⭐ Players:</span> Suryakumar, Bumrah, Shaheen</li>
                 <li><span>💎 Gems:</span> 1,500</li>
                 <li><span>🪙 Coins:</span> 95,000</li>
                 <li><span>🎯 Rank:</span> Gold (Top 5000)</li>
-                <li><span>🏅 Special Items:</span> Power Hitter Gloves</li>
+                <li><span>🏅 Special:</span> Power Hitter Gloves</li>
             </ul>
         </div>
 
         <div class="image-grid">
-            <img src="https://via.placeholder.com/300x200/0f3460/25D366?text=Team+3" alt="Account 3 - Team">
-            <img src="https://via.placeholder.com/300x200/0f3460/25D366?text=Players+3" alt="Account 3 - Players">
-            <img src="https://via.placeholder.com/300x200/0f3460/25D366?text=Stats+3" alt="Account 3 - Stats">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/25D366?text=Team" alt="Team">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/25D366?text=Players" alt="Players">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/25D366?text=Stats" alt="Stats">
         </div>
 
-        <a href="https://wa.me/923001234567?text=I want to buy Account #3 - Rising Star ($10)" 
+        <a href="https://wa.me/923001234567?text=I want to buy DC25 Account #3 - $10" 
            class="whatsapp-btn" target="_blank">
            💬 Order via WhatsApp
         </a>
     </div>
 
+
     <!-- ======================================== -->
-    <!-- ACCOUNT 4 -->
+    <!-- HCR2 SECTION -->
+    <!-- ======================================== -->
+    <div class="game-title" style="margin-top: 50px;">
+        <span class="icon">🏎️</span> HCR2 (Hill Climb Racing 2) <span style="font-size:16px; color:#ffd700;">●</span> Accounts for Sale
+    </div>
+
+    <!-- ======================================== -->
+    <!-- HCR2 - ACCOUNT 1 -->
     <!-- ======================================== -->
     <div class="account-card">
-        <h2>🏏 Account #4 - All-Rounder Package</h2>
-        <div class="rating">⭐⭐⭐⭐⭐ 5.0 (3 sales)</div>
-        <div class="account-price">$30.00</div>
+        <div class="account-header">
+            <h2>🚗 HCR2 Account #1 <span class="order-badge">⚡ Order Now</span></h2>
+            <span class="price">$15</span>
+        </div>
+        <div class="rating">⭐⭐⭐⭐⭐ 5.0 (10 sold)</div>
 
         <div class="account-details">
             <ul>
-                <li><span>🏆 Overall Rating:</span> 92</li>
-                <li><span>⭐ Players:</span> Ben Stokes, Jos Buttler, Jofra Archer, Sam Curran</li>
-                <li><span>💎 Gems:</span> 8,500</li>
-                <li><span>🪙 Coins:</span> 400,000</li>
-                <li><span>🎯 Rank:</span> Legendary (Top 200)</li>
-                <li><span>🏅 Special Items:</span> All-Rounder Elite Kit, Batting Mastery</li>
+                <li><span>🚗 Vehicles:</span> Rally Car, Sports Car, Monster Truck</li>
+                <li><span>🛞 Upgrades:</span> All Max (Full Tuning)</li>
+                <li><span>🪙 Coins:</span> 850,000</li>
+                <li><span>💎 Gems:</span> 1,200</li>
+                <li><span>🏆 Rank:</span> Legendary (Top 200)</li>
+                <li><span>🎨 Custom:</span> Exclusive Paint Jobs</li>
             </ul>
         </div>
 
         <div class="image-grid">
-            <img src="https://via.placeholder.com/300x200/0f3460/e94560?text=Team+4" alt="Account 4 - Team">
-            <img src="https://via.placeholder.com/300x200/0f3460/e94560?text=Players+4" alt="Account 4 - Players">
-            <img src="https://via.placeholder.com/300x200/0f3460/e94560?text=Stats+4" alt="Account 4 - Stats">
-            <img src="https://via.placeholder.com/300x200/0f3460/e94560?text=Items+4" alt="Account 4 - Items">
-            <img src="https://via.placeholder.com/300x200/0f3460/e94560?text=Match+4" alt="Account 4 - Match">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ff6b6b?text=Vehicles" alt="Vehicles">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ff6b6b?text=Upgrades" alt="Upgrades">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ff6b6b?text=Stats" alt="Stats">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ff6b6b?text=Custom" alt="Custom">
         </div>
 
-        <a href="https://wa.me/923001234567?text=I want to buy Account #4 - All-Rounder Package ($30)" 
+        <a href="https://wa.me/923001234567?text=I want to buy HCR2 Account #1 - $15" 
            class="whatsapp-btn" target="_blank">
            💬 Order via WhatsApp
         </a>
     </div>
 
     <!-- ======================================== -->
-    <!-- ACCOUNT 5 -->
+    <!-- HCR2 - ACCOUNT 2 -->
     <!-- ======================================== -->
     <div class="account-card">
-        <h2>🔥 Account #5 - Mega Bundle</h2>
-        <div class="rating">⭐⭐⭐⭐⭐ 5.0 (20 sales)</div>
-        <div class="account-price">$50.00</div>
+        <div class="account-header">
+            <h2>🏎️ HCR2 Account #2 <span class="order-badge">⚡ Order Now</span></h2>
+            <span class="price">$8</span>
+        </div>
+        <div class="rating">⭐⭐⭐⭐ 4.6 (6 sold)</div>
 
         <div class="account-details">
             <ul>
-                <li><span>🏆 Overall Rating:</span> 98</li>
-                <li><span>⭐ Players:</span> All Legendary Players + Exclusive T20 Stars</li>
-                <li><span>💎 Gems:</span> 15,000</li>
-                <li><span>🪙 Coins:</span> 1,000,000</li>
-                <li><span>🎯 Rank:</span> #1 Global (Top 10)</li>
-                <li><span>🏅 Special Items:</span> ALL Premium Kits + Exclusive Emotes</li>
+                <li><span>🚗 Vehicles:</span> Jeep, Motocross, Super Diesel</li>
+                <li><span>🛞 Upgrades:</span> Level 15+</li>
+                <li><span>🪙 Coins:</span> 320,000</li>
+                <li><span>💎 Gems:</span> 450</li>
+                <li><span>🏆 Rank:</span> Diamond (Top 1000)</li>
+                <li><span>🎨 Custom:</span> 2 Paint Jobs</li>
             </ul>
         </div>
 
         <div class="image-grid">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Team+5" alt="Account 5 - Team">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Players+5" alt="Account 5 - Players">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Stats+5" alt="Account 5 - Stats">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Items+5" alt="Account 5 - Items">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Match+5" alt="Account 5 - Match">
-            <img src="https://via.placeholder.com/300x200/0f3460/ffd700?text=Achievements+5" alt="Account 5 - Achievements">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ffd93d?text=Vehicles" alt="Vehicles">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ffd93d?text=Upgrades" alt="Upgrades">
+            <img src="https://via.placeholder.com/300x200/1a1a3e/ffd93d?text=Stats" alt="Stats">
         </div>
 
-        <a href="https://wa.me/923001234567?text=I want to buy Account #5 - Mega Bundle ($50)" 
+        <a href="https://wa.me/923001234567?text=I want to buy HCR2 Account #2 - $8" 
            class="whatsapp-btn" target="_blank">
            💬 Order via WhatsApp
         </a>
     </div>
 
+    <!-- ======================================== -->
+    <!-- FOOTER -->
+    <!-- ======================================== -->
     <div class="footer">
-        ⚡ All accounts are legitimately owned | Contact via WhatsApp for details
+        🎮 Game Accounts Marketplace &bull; All accounts are legitimately owned &bull; <span>100% Trusted</span>
     </div>
 
 </body>
-                                                                                                 </html>
+    </html>
