@@ -102,16 +102,6 @@
             position: relative;
             overflow: hidden;
         }
-        .account-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(108,92,231,0.05), transparent);
-            pointer-events: none;
-        }
         .account-card:hover {
             transform: translateY(-4px);
             border-color: rgba(108,92,231,0.3);
@@ -131,18 +121,6 @@
             font-size: 20px;
             font-weight: 700;
             color: #fff;
-        }
-        .account-top h2 .sale-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, #fd79a8, #e17055);
-            padding: 2px 14px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-left: 10px;
-            vertical-align: middle;
         }
         .account-top .price {
             font-size: 28px;
@@ -194,19 +172,97 @@
             position: relative;
             z-index: 1;
         }
-        .image-grid img {
-            width: 100%;
-            height: 130px;
-            object-fit: cover;
+        .image-grid .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
             border-radius: 10px;
             border: 2px solid rgba(255,255,255,0.05);
             transition: all 0.3s ease;
             background: #1a1a3e;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .image-grid img:hover {
-            transform: scale(1.04);
+        .image-grid .img-wrapper:hover {
             border-color: #6c5ce7;
+            transform: scale(1.03);
             box-shadow: 0 8px 25px rgba(108,92,231,0.25);
+        }
+        .image-grid .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .image-grid .img-wrapper .view-icon {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .image-grid .img-wrapper:hover .view-icon {
+            opacity: 1;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 95%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+        }
+        .lightbox .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+        .lightbox .close-lightbox:hover {
+            transform: rotate(90deg);
+            color: #ffd700;
+        }
+        .lightbox .caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 20px;
+            border-radius: 30px;
         }
 
         /* ===== WHATSAPP ===== */
@@ -259,9 +315,9 @@
             .account-top .price { margin-top: 5px; font-size: 22px; }
             .highlights ul { grid-template-columns: 1fr; }
             .image-grid { grid-template-columns: repeat(2, 1fr); }
-            .image-grid img { height: 100px; }
             .game-title { font-size: 18px; padding: 10px 18px; }
             .account-top h2 { font-size: 17px; }
+            .lightbox img { max-width: 100%; max-height: 80%; }
         }
     </style>
 </head>
@@ -282,6 +338,15 @@
     </div>
 
     <!-- ======================================== -->
+    <!-- LIGHTBOX (Image Viewer) -->
+    <!-- ======================================== -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox" onclick="closeLightbox()">×</span>
+        <img id="lightbox-img" src="" alt="Full view">
+        <div class="caption" id="lightbox-caption">Click to close</div>
+    </div>
+
+    <!-- ======================================== -->
     <!-- DREAM CRICKET 25 -->
     <!-- ======================================== -->
     <div class="game-title">🏏 Dream Cricket 25</div>
@@ -289,8 +354,8 @@
     <!-- ===== DC25 - ACCOUNT 1 ===== -->
     <div class="account-card">
         <div class="account-top">
-            <h2>Dream Cricket 25 Account <span class="sale-tag">⚡ For Sale</span></h2>
-            <span class="price">$25</span>
+            <h2>Dream Cricket 25 Account for Sale</h2>
+            <span class="price">Rs. 4,500</span>
         </div>
 
         <div class="highlights">
@@ -305,13 +370,25 @@
         </div>
 
         <div class="image-grid">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/6c5ce7?text=Image+1" alt="Account Image">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/6c5ce7?text=Image+2" alt="Account Image">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/6c5ce7?text=Image+3" alt="Account Image">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/6c5ce7?text=Image+4" alt="Account Image">
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/6c5ce7/ffffff?text=Account+Image+1', 'DC25 Account 1 - Team')">
+                <img src="https://via.placeholder.com/300x200/6c5ce7/ffffff?text=Image+1" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/a29bfe/ffffff?text=Account+Image+2', 'DC25 Account 1 - Players')">
+                <img src="https://via.placeholder.com/300x200/a29bfe/ffffff?text=Image+2" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/fdcb6e/ffffff?text=Account+Image+3', 'DC25 Account 1 - Stats')">
+                <img src="https://via.placeholder.com/300x200/fdcb6e/ffffff?text=Image+3" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/e17055/ffffff?text=Account+Image+4', 'DC25 Account 1 - Items')">
+                <img src="https://via.placeholder.com/300x200/e17055/ffffff?text=Image+4" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
         </div>
 
-        <a href="https://wa.me/923001234567?text=I want to buy Dream Cricket 25 Account - $25" 
+        <a href="https://wa.me/923001234567?text=I want to buy Dream Cricket 25 Account - Rs. 4,500" 
            class="whatsapp-btn" target="_blank">
            💬 Order via WhatsApp
         </a>
@@ -320,8 +397,8 @@
     <!-- ===== DC25 - ACCOUNT 2 ===== -->
     <div class="account-card">
         <div class="account-top">
-            <h2>Dream Cricket 25 Account <span class="sale-tag">⚡ For Sale</span></h2>
-            <span class="price">$18</span>
+            <h2>Dream Cricket 25 Account for Sale</h2>
+            <span class="price">Rs. 3,200</span>
         </div>
 
         <div class="highlights">
@@ -336,12 +413,21 @@
         </div>
 
         <div class="image-grid">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/a29bfe?text=Image+1" alt="Account Image">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/a29bfe?text=Image+2" alt="Account Image">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/a29bfe?text=Image+3" alt="Account Image">
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/6c5ce7/ffffff?text=Account+2+Image+1', 'DC25 Account 2 - Team')">
+                <img src="https://via.placeholder.com/300x200/6c5ce7/ffffff?text=Image+1" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/a29bfe/ffffff?text=Account+2+Image+2', 'DC25 Account 2 - Players')">
+                <img src="https://via.placeholder.com/300x200/a29bfe/ffffff?text=Image+2" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/fdcb6e/ffffff?text=Account+2+Image+3', 'DC25 Account 2 - Stats')">
+                <img src="https://via.placeholder.com/300x200/fdcb6e/ffffff?text=Image+3" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
         </div>
 
-        <a href="https://wa.me/923001234567?text=I want to buy Dream Cricket 25 Account - $18" 
+        <a href="https://wa.me/923001234567?text=I want to buy Dream Cricket 25 Account - Rs. 3,200" 
            class="whatsapp-btn" target="_blank">
            💬 Order via WhatsApp
         </a>
@@ -350,8 +436,8 @@
     <!-- ===== DC25 - ACCOUNT 3 ===== -->
     <div class="account-card">
         <div class="account-top">
-            <h2>Dream Cricket 25 Account <span class="sale-tag">⚡ For Sale</span></h2>
-            <span class="price">$10</span>
+            <h2>Dream Cricket 25 Account for Sale</h2>
+            <span class="price">Rs. 1,800</span>
         </div>
 
         <div class="highlights">
@@ -366,11 +452,17 @@
         </div>
 
         <div class="image-grid">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/ffd700?text=Image+1" alt="Account Image">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/ffd700?text=Image+2" alt="Account Image">
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/6c5ce7/ffffff?text=Account+3+Image+1', 'DC25 Account 3 - Team')">
+                <img src="https://via.placeholder.com/300x200/6c5ce7/ffffff?text=Image+1" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/a29bfe/ffffff?text=Account+3+Image+2', 'DC25 Account 3 - Players')">
+                <img src="https://via.placeholder.com/300x200/a29bfe/ffffff?text=Image+2" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
         </div>
 
-        <a href="https://wa.me/923001234567?text=I want to buy Dream Cricket 25 Account - $10" 
+        <a href="https://wa.me/923001234567?text=I want to buy Dream Cricket 25 Account - Rs. 1,800" 
            class="whatsapp-btn" target="_blank">
            💬 Order via WhatsApp
         </a>
@@ -384,8 +476,8 @@
     <!-- ===== HCR2 - ACCOUNT ===== -->
     <div class="account-card">
         <div class="account-top">
-            <h2>HCR2 Account <span class="sale-tag">⚡ For Sale</span></h2>
-            <span class="price">$15</span>
+            <h2>HCR2 Account for Sale</h2>
+            <span class="price">Rs. 2,500</span>
         </div>
 
         <div class="highlights">
@@ -400,12 +492,21 @@
         </div>
 
         <div class="image-grid">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/ff6b6b?text=Image+1" alt="Account Image">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/ff6b6b?text=Image+2" alt="Account Image">
-            <img src="https://via.placeholder.com/300x200/1a1a3e/ff6b6b?text=Image+3" alt="Account Image">
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/ff6b6b/ffffff?text=HCR2+Image+1', 'HCR2 Account - Vehicles')">
+                <img src="https://via.placeholder.com/300x200/ff6b6b/ffffff?text=Image+1" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/feca57/ffffff?text=HCR2+Image+2', 'HCR2 Account - Upgrades')">
+                <img src="https://via.placeholder.com/300x200/feca57/ffffff?text=Image+2" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
+            <div class="img-wrapper" onclick="openLightbox('https://via.placeholder.com/800x600/54a0ff/ffffff?text=HCR2+Image+3', 'HCR2 Account - Stats')">
+                <img src="https://via.placeholder.com/300x200/54a0ff/ffffff?text=Image+3" alt="Account Image">
+                <span class="view-icon">🔍 View</span>
+            </div>
         </div>
 
-        <a href="https://wa.me/923001234567?text=I want to buy HCR2 Account - $15" 
+        <a href="https://wa.me/923001234567?text=I want to buy HCR2 Account - Rs. 2,500" 
            class="whatsapp-btn" target="_blank">
            💬 Order via WhatsApp
         </a>
@@ -416,5 +517,36 @@
         🎮 <span>Game Accounts Marketplace</span> &bull; Owner: Ayaz Aatish
     </div>
 
+    <!-- ======================================== -->
+    <!-- LIGHTBOX JAVASCRIPT -->
+    <!-- ======================================== -->
+    <script>
+        function openLightbox(src, caption) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-caption').textContent = caption || 'Click to close';
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Close on click outside image
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+    </script>
+
 </body>
-                                                     </html>
+                </html>
